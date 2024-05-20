@@ -1,58 +1,28 @@
-// // type annotations
+//functions
 
-// let name: string = 'sunny';
-// name = name.toLocaleUpperCase();
-// console.log(name);
+function sayHi(name: string) {
+  console.log(`hi, ${name.toUpperCase()}`);
+}
 
-// let cost: number = 12;
-// cost++;
-// console.log(cost);
+//explicity set return type to number
+function calculateDiscount(price: number): number {
+  return price * 0.9;
+}
 
-// let isHome: boolean = false;
-// isHome = false;
-// console.log(isHome);
+const finalPrice = calculateDiscount(200);
 
-// console.log(name);
+//challenge
 
-// //union type
+const names: string[] = ['tim', 'kim'];
 
-// let tax: number | string = 10;
+function checkName(name: string): boolean {
+  if (names.includes(name)) {
+    console.log(name);
+    return true;
+  } else {
+    return false;
+  }
+}
 
-// tax = 100;
-// tax = 'fs';
-
-// let requestStatus: 'pending' | 'success' | 'error' = 'pending';
-
-// requestStatus = 'pending';
-
-// //type any
-
-// let notSure: any = 4;
-// notSure = 'sdf';
-// notSure = 3;
-// notSure = false;
-
-// //example
-
-// const books = ['hello', 'hi', 'hole'];
-
-// let foundBook: string | undefined;
-
-// for (let book of books) {
-//   if (book === 'hi') {
-//     foundBook = book;
-//     break;
-//   }
-// }
-
-// foundBook = foundBook?.toUpperCase();
-// console.log(foundBook);
-
-let orderStatus: 'processing' | 'shipped' | 'delivered' = 'delivered';
-
-orderStatus = 'shipped';
-orderStatus = 'delivered';
-
-let discount: number | string = 20;
-
-discount = '20%';
+checkName('tim');
+console.log(checkName('ti'));
