@@ -1,135 +1,55 @@
-// interface Book {
-//   readonly isbn: number;
-//   title: string;
-//   author: string;
-//   genre?: string;
-//   printAuthor(): void;
-//   printTitle(message: string): string;
-// }
+let person: [string, number] = ['john', 25];
 
-// const deepWork: Book = {
-//   isbn: 123,
-//   title: 'deep work',
-//   author: 'cal newport',
-//   genre: 'self-help',
-//   printAuthor() {
-//     console.log(this.author);
-//   },
-//   printTitle(message) {
-//     return `${this.title} ${message}`;
-//   },
-// };
+let date: [number, number, number] = [1, 1, 25];
 
-// deepWork.printAuthor();
-// const result = deepWork.printTitle('hello');
-// console.log(result);
+function getPerson(): [string, number] {
+  return ['john', 25];
+}
 
-// interface Computer {
-//   readonly id: number;
-//   brand: string;
-//   ram: number;
-//   storage?: number;
-//   upgradeRam(number: number): number;
-// }
+let randomPerson = getPerson();
 
-// const object1: Computer = {
-//   id: 1,
-//   brand: 'apple',
-//   ram: 16,
-//   upgradeRam(number) {
-//     this.ram += number;
-//     return this.ram;
-//   },
-// };
+enum ServerRespStatus {
+  Success = 200,
+  Error = 500,
+}
 
-// console.log(object1);
-// console.log(object1.upgradeRam(16));
-// console.log(object1);
+console.log(ServerRespStatus);
 
-// //interface merging and extend
+interface ServerResponse {
+  result: ServerRespStatus;
+  data: string[];
+}
 
-// interface Person {
-//   name: string;
-//   getDetails(): string;
-// }
+function getServerResp(): ServerResponse {
+  return { result: ServerRespStatus.Success, data: ['first', 'second'] };
+}
 
-// interface DogOwner {
-//   dogName: string;
-//   getDogDetails(): string;
-// }
+const response: ServerResponse = getServerResp();
 
-// interface Person {
-//   age: number;
-// }
+console.log(response);
 
-// const person: Person = {
-//   name: 'john',
-//   age: 3,
-//   getDetails() {
-//     return `Name: ${this.name} ${this.age}`;
-//   },
-// };
+enum UserRole {
+  Admin = 'Admin',
+  Manager = 'Manager',
+  Employee = 'Employee',
+}
 
-// interface Employee extends Person {
-//   employeeId: number;
-// }
-
-// const employee: Employee = {
-//   name: 'tim',
-//   age: 90,
-//   employeeId: 123,
-//   getDetails() {
-//     return `${this.name} ${this.age} ${this.employeeId}`;
-//   },
-// };
-
-// interface Manager extends Person, DogOwner {
-//   managePeople(): void;
-// }
-
-// const manager: Manager = {
-//   name: 'jim',
-//   age: 35,
-//   dogName: 'rex',
-
-//   getDetails() {
-//     return `${this.name} ${this.age}`;
-//   },
-
-//   getDogDetails() {
-//     return `${this.dogName}`;
-//   },
-//   managePeople() {
-//     console.log(`managing people`);
-//   },
-// };
-
-// console.log(manager);
-
-interface Person {
+type User = {
+  id: number;
   name: string;
+  role: UserRole;
+  contact: [string, string];
+};
+
+function createUser(object: User): User {
+  return object;
 }
 
-interface DogOwner extends Person {
-  dogName: string;
-}
+const result = createUser({
+  id: 1,
+  name: 'sunny',
+  role: UserRole.Admin,
+  contact: ['sd@gmail.com', '23423423'],
+});
 
-interface Manager extends Person {
-  managePeople(): void;
-  delegateTasks(): void;
-}
-
-function getEmployee(): Person | Manager | DogOwner {
-  const randomNumber = Math.random();
-  if (randomNumber < 0.33) {
-    return { name: 'polo' };
-  } else if (randomNumber < 0.66) {
-    return { name: 'tim', dogName: 'rex' };
-  } else {
-    return { name: 'boss', managePeople() {}, delegateTasks() {} };
-  }
-}
-
-const employee: Person | DogOwner | Manager = getEmployee();
-
-console.log(employee);
+console.log(result);
