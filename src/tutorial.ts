@@ -55,3 +55,52 @@ function printLength(str: String | null | undefined): void {
 }
 
 printLength('');
+
+//instance of
+
+try {
+  throw new Error('this is an error');
+} catch (error) {
+  if (error instanceof Error) {
+    console.log(error.message);
+  }
+}
+
+function checkInput(input: Date | string): string {
+  if (input instanceof Date) {
+    return input.getFullYear().toString();
+  }
+  return input;
+}
+
+//predicate
+type Student = {
+  name: string;
+  study: () => void;
+};
+
+type User = {
+  name: string;
+  login: () => void;
+};
+
+type Person = Student | User;
+
+const randomPerson = (): Person => {
+  return Math.random() > 0.5
+    ? { name: 'john', study: () => console.log('Studying') }
+    : { name: 'mary', login: () => console.log('Logging in') };
+};
+
+const person = randomPerson();
+
+function isStudent(person: Person): person is Student {
+  // return 'study' in person
+  return (person as Student).study !== undefined;
+}
+
+if (isStudent(person)) {
+  person.study();
+} else {
+  person.login();
+}
